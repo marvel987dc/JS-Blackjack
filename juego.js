@@ -69,42 +69,40 @@ const valorCarta = (carta) => {
         do {
             const carta = pedirCarta();
 
-            puntosComputadora = puntosComputadora + valorCarta(carta);
+            puntosComputadora += valorCarta(carta);
             puntosHTML[1].innerText = puntosComputadora;
         
             // <!-- <img class="cards" src="assets/cartas/10C.png" > -->
             const imgCarta = document.createElement('img');
             imgCarta.src = `assets/cartas/${carta}.png`;
-        
             imgCarta.classList.add('cards');
             divCartasComputadora.append(imgCarta);
 
-            if (puntosMinimos > 21){
+            if (puntosMinimos >= 21){
                 break;
             }
-         }while( (puntosComputadora > puntosMinimos) && (puntosComputadora <= 21));
+
+         }while( (puntosComputadora < puntosMinimos && puntosComputadora <= 21));
+        
 
     setTimeout(() => {
 
-            if(puntosComputadora === puntosMinimos){
+         if(puntosComputadora === puntosJugador){
                 alert('There is a draw :c');
-            }else if(puntosMinimos < 21){
+            }else if(puntosComputadora > 21 || puntosComputadora < puntosMinimos){
                 alert('You Win Bitch!!!');
-            } else if (puntosJugador < 21){
-                alert('You Win Bitch!!! :)');
             } else{
                 alert('Computer Win >:C');
             }
-            
         },10);
-    } 
+    };
 
     btnNuevo.addEventListener('click', () => {
 
         console.clear();
         deck = [];
-
-        deck = createDeck();
+        createDeck();
+        
 
         puntosJugador = 0;
         puntosComputadora = 0;
@@ -140,19 +138,17 @@ btnPedir.addEventListener('click', () => {
     //constante para pedir una carta, creo la contante y llamo la funcion para generarla,
     const carta = pedirCarta();
 
-    puntosJugador = puntosJugador + valorCarta(carta);
+    puntosJugador += valorCarta(carta);
     puntosHTML[0].innerText = puntosJugador;
 
     // <!-- <img class="cards" src="assets/cartas/10C.png" > -->
     const imgCarta = document.createElement('img');
     imgCarta.src = `assets/cartas/${carta}.png`;
-
     imgCarta.classList.add('cards');
     divCartasJugador.append(imgCarta);
     
     // divCartasJUgador.append
         
-    setTimeout(() => {
      if(puntosJugador > 21){
         btnPedir.disabled = true;
         btnDetener.disabled = true;
@@ -164,7 +160,7 @@ btnPedir.addEventListener('click', () => {
         btnDetener.disabled = true;
         puntosComputadora(puntosJugador);
     }
-},10);
+});
 
 
 
@@ -173,9 +169,7 @@ btnPedir.addEventListener('click', () => {
     btnDetener.disabled = true;
 
     turnoComputadora(puntosJugador);
-    }
-);
-});
+    });
 
 
 
