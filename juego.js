@@ -89,8 +89,6 @@ const valorCarta = (carta) => {
 
          if(puntosComputadora === puntosJugador){
                 alert('There is a draw :c');
-            }else if(puntosComputadora > 21 || puntosComputadora < puntosMinimos){
-                alert('You Win Bitch!!!');
             } else{
                 alert('Computer Win >:C');
             }
@@ -150,6 +148,7 @@ btnPedir.addEventListener('click', () => {
     // divCartasJUgador.append
         
      if(puntosJugador > 21){
+        alert("You lost Buddy, good luck next time!!")
         btnPedir.disabled = true;
         btnDetener.disabled = true;
         turnoComputadora(puntosJugador);
